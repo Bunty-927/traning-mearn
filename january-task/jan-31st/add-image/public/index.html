@@ -1,0 +1,42 @@
+
+<!DOCTYPE HTML> 
+<html> 
+  
+<head> 
+    <title> 
+        How to create an image element
+        dynamically using JavaScript ?
+    </title>     
+</head> 
+  
+<body id = "body" style = "text-align:center;"> 
+      
+    <h1 style = "color:green;" > 
+        Upload Your Image Here!.. 
+    </h1> 
+      
+    <p id = "IMAGE_UP" style = "font-size: 15px; font-weight: bold;"> 
+    </p> 
+      
+    <button onclick = "Upload()"> 
+        click here 
+    </button> 
+      
+    <p id = "IMAGE_DOWN" style = "color:green; font-size: 20px; font-weight: bold;"> 
+    </p> 
+      
+    <script> 
+        var up = document.getElementById('IMAGE_UP'); 
+        up.innerHTML = "Click on the button to add image element"; 
+        var down = document.getElementById('IMAGE_DOWN'); 
+          
+        function Upload() {
+            var img = document.createElement('img');
+            img.src = 'https://wallpapers.com/images/high/coding-and-coffee-o33mx7bb45cwpend.jpg';
+            document.getElementById('body').appendChild(img);
+            down.innerHTML = "Image Element Added."; 
+        } 
+    </script> 
+</body> 
+  
+</html>

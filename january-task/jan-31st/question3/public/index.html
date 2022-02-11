@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program 3</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            items: [],
+            DataisLoaded: false,
+          };
+        }
+
+        componentDidMount() {
+          fetch("https://retoolapi.dev/BUCPSc/posts/")
+            .then((res) => res.json())
+            .then((json) => {
+              this.setState({
+                items: json,
+                DataisLoaded: true,
+              });
+            });
+        }
+        render() {
+          const { DataisLoaded, items } = this.state;
+          if (!DataisLoaded)
+            return (
+              <div>
+                <h1> Loading.... </h1>{" "}
+              </div>
+            );
+
+          return (
+            <div className="App">
+              <h1 style={{ "text-align": "center" }}>
+                {" "}
+                Titles from fetched API{" "}
+              </h1>{" "}
+              <table
+                style={{
+                  margin: "auto",
+                  border: "1px solid black",
+                  "border-collapse": "collapse",
+                }}
+              >
+                <th style={{ border: "1px solid black" }}>Title</th>
+                {items.map((item) => (
+                  <tr
+                    style={{
+                      border: "1px solid black",
+                      "border-collapse": "collapse",
+                      "text-align": "center",
+                    }}
+                    key={item.id}
+                  >
+                    {item.title}
+                  </tr>
+                ))}
+              </table>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
